@@ -16,15 +16,16 @@
     "url": "https://github.com/Buzonxxxx/webdriverio-mocha-starter/issues"
   },
   "homepage": "https://github.com/Buzonxxxx/webdriverio-mocha-starter#readme",
-  "dependencies": {
-    "webdriverio": "^4.13.1"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "mocha": "^5.2.0",
+    "selenium-standalone": "^6.15.3",
     "chromedriver": "^2.40.0",
-    "wdio-selenium-standalone-service": "0.0.10",
     "wdio-chromedriver-service": "^0.1.3",
-    "wdio-mocha-framework": "^0.5.13",
     "wdio-dot-reporter": "0.0.9",
-    "wdio-spec-reporter": "^0.1.4"
+    "wdio-mocha-framework": "^0.5.13",
+    "wdio-selenium-standalone-service": "0.0.10",
+    "wdio-spec-reporter": "^0.1.4",
+    "webdriverio": "^4.13.2"
   }
 }
