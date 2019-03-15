@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Buzonxxxx/webdriverio-mocha-starter#readme",
   "dependencies": {},
   "devDependencies": {
+    "chai": "^4.2.0",
     "chromedriver": "^2.40.0",
     "mocha": "^6.0.2",
     "wdio-chromedriver-service": "^0.1.3",

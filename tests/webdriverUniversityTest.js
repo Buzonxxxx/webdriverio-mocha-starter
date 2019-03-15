@@ -6,6 +6,10 @@ describe('Verify whether webdriveruniversity links on homepage work correctly', 
     })
     browser.url('/')
     const title = browser.getTitle()
+    assert.equal(title, 'WebDriverUniversity.com')
+    expect(title).to.equal('WebDriverUniversity.com')
+    title.should.equal('WebDriverUniversity.com')
+    
     console.log(`Title is: ${title}`)
     browser.click('#contact-us')
     browser.pause(3000)
@@ -14,6 +18,10 @@ describe('Verify whether webdriveruniversity links on homepage work correctly', 
     browser.url('/')
     browser.click('#login-portal')
     const title = browser.getTitle()
+    assert.equal(title, 'WebDriverUniversity.com')
+    expect(title).to.equal('WebDriverUniversity.com')
+    title.should.equal('WebDriverUniversity.com')
+
     console.log(`Title is: ${title}`)
     browser.pause(3000)
   })
