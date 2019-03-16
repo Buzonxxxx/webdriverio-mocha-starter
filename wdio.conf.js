@@ -5,6 +5,8 @@ if (process.env.SERVER === 'prod') {
     baseUrl = 'http://www.webdriveruniversity.com/'
 }
 
+const timeout = process.env.DEBUG ? 9999999 : 10000
+
 exports.config = {
     
     //
@@ -136,7 +138,8 @@ exports.config = {
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
-        ui: 'bdd'
+        ui: 'bdd',
+        timeout: timeout
     },
     //
     // =====
@@ -169,7 +172,7 @@ exports.config = {
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
     before: function (capabilities, specs) {
-        assert = require('assert')
+        assert = require('chai').assert
         expect = require('chai').expect
         should = require('chai').should()
     },

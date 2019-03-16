@@ -9,8 +9,8 @@ describe('Verify whether webdriveruniversity links on homepage work correctly', 
     assert.equal(title, 'WebDriverUniversity.com')
     expect(title).to.equal('WebDriverUniversity.com')
     title.should.equal('WebDriverUniversity.com')
-    
     console.log(`Title is: ${title}`)
+    // browser.debug()
     browser.click('#contact-us')
     browser.pause(3000)
   })
@@ -21,7 +21,6 @@ describe('Verify whether webdriveruniversity links on homepage work correctly', 
     assert.equal(title, 'WebDriverUniversity.com')
     expect(title).to.equal('WebDriverUniversity.com')
     title.should.equal('WebDriverUniversity.com')
-
     console.log(`Title is: ${title}`)
     browser.pause(3000)
   })
