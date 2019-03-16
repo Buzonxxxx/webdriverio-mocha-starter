@@ -7,4 +7,14 @@
 3. Execute test
 > `npm test`
 
-note:
+##Note:
+* Execute specific test
+`npm test -- --spec=tests/TEST FILE NAME`
+
+* Select differnet test dev
+ i.g. enter production env
+`SERVER=prod npm test`
+
+* Enter debug Mode
+Add `browser.debug()` in your test file and execute below command
+`DEBUG=true npm test`
