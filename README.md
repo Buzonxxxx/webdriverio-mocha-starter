@@ -18,3 +18,7 @@
 * Enter debug Mode
 Add `browser.debug()` in your test file and execute below command
 `DEBUG=true npm test`
+
+* Install Ranorex selocity to get css/xpath
+https://chrome.google.com/webstore/detail/ranorex-selocity/ocgghcnnjekfpbmafindjmijdpopafoe?utm_source=chrome-ntp-icon
+

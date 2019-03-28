@@ -6,9 +6,9 @@ describe('Verify whether webdriveruniversity links on homepage work correctly', 
     })
     browser.url('/')
     const title = browser.getTitle()
-    assert.equal(title, 'WebDriverUniversity.com')
-    expect(title).to.equal('WebDriverUniversity.com')
-    title.should.equal('WebDriverUniversity.com')
+    assert.equal(title, 'WebDriverUniversity.com') //assert
+    expect(title).to.equal('WebDriverUniversity.com') //expect
+    title.should.equal('WebDriverUniversity.com') //chai
     console.log(`Title is: ${title}`)
     // browser.debug()
     browser.click('#contact-us')
