@@ -1,4 +1,7 @@
-# XPAEX-WebdriverIO-Test
+# WebdriverIO-Mocha-Starter
+This repo incluse some sample tests/codes about how to use WebdirvierIO v4
+
+####Steps
 
 1. Git clone the [repo]
 > `git clone [repo]`
