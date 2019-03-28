@@ -1,27 +1,41 @@
 describe('Verify whether webdriveruniversity links on homepage work correctly', () => {
   it('check that the contact us button opens the contact us page',  () => {
-    browser.setViewportSize({
-      width: 1200,
-      height: 800
-    })
+    // browser.setViewportSize({
+    //   width: 1200,
+    //   height: 800
+    // })
     browser.url('/')
-    const title = browser.getTitle()
+    let title = browser.getTitle()
     assert.equal(title, 'WebDriverUniversity.com') //assert
     expect(title).to.equal('WebDriverUniversity.com') //expect
     title.should.equal('WebDriverUniversity.com') //chai
     console.log(`Title is: ${title}`)
     // browser.debug()
+
     browser.click('#contact-us')
-    browser.pause(3000)
+    const tabIds = browser.getTabIds();
+    console.log(tabIds);
+    browser.switchTab(tabIds[1]);
+    const title2 = browser.getTitle()
+    assert.equal(title2, 'WebDriver | Contact Us') 
+
+    const url = browser.getUrl();
+    expect(url).include('Contact-Us', 'URL Mismatch')
+    browser.close();
   })
   it('check that the login button opens the login portal page',  () => {
     browser.url('/')
-    browser.click('#login-portal')
     const title = browser.getTitle()
-    assert.equal(title, 'WebDriverUniversity.com')
-    expect(title).to.equal('WebDriverUniversity.com')
     title.should.equal('WebDriverUniversity.com')
     console.log(`Title is: ${title}`)
-    browser.pause(3000)
+
+    browser.click('#login-portal')
+    const tabIds = browser.getTabIds();
+    browser.switchTab(tabIds[1]);
+    const title2 = browser.getTitle()
+    assert.equal(title2, 'WebDriver | Login Portal') 
+
+    const url = browser.getUrl();
+    expect(url).include('Login-Portal', 'URL Mismatch')
   })
 })
