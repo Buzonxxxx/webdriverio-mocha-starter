@@ -1,16 +1,23 @@
+const request = require('sync-request');
+
 beforeEach(() => {
 	browser.url('/Contact-Us/contactus.html');
 })
 
 describe('Test Contact Us form WebdriverUni', () => {
+  const res = request('GET', 'https://jsonplaceholder.typicode.com/posts/1/comments')
+  let contactDetails = JSON.parse(res.getBody().toString('utf8'));
+  contactDetails.length = 3; // get first 3 contact details
+
     beforeEach(() => {
       console.log('Inside the describe block!');
     })
+contactDetails.forEach(contactDetail => {
   it('Should be able to submit a successful submission via contact us form', () => {
     browser.setValue("[name='first_name']",'Louis');
     browser.setValue("[name='last_name']",'Liao');
-    browser.setValue("[name='email']",'xxx@gmail.com');
-    browser.setValue("[name='message']",'Hi there!');
+    browser.setValue("[name='email']", contactDetail.email);
+    browser.setValue("[name='message']", contactDetail.body);
     browser.click('[type="submit"]');
 
     const successfulContactConfirmation = browser.isExisting("#contact_reply h1");
@@ -19,6 +26,8 @@ describe('Test Contact Us form WebdriverUni', () => {
     assert.equal(successfulSubmission, "Thank You for your Message!");
 
     });
+
+})    
 
   it('Should not be able to submit a successful submission via contact us form as all fields are required', () => {
     browser.setValue("[name='first_name']",'Mike');
