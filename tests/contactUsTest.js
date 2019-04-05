@@ -1,4 +1,5 @@
 const request = require("sync-request");
+const ContactUS_Page = require("../pageObjects/ContactUS_Page");
 
 beforeEach(() => {
   browser.url("/Contact-Us/contactus.html");
@@ -9,25 +10,17 @@ describe("Test Contact Us form WebdriverUniversity", () => {
   let contactDetails = JSON.parse(res.getBody().toString("utf8"));
   contactDetails.length = 3; // get first 3 contact details
 
-  const firstNameSelector = "[name='first_name']";
-  const lastNameSelector = "[name='last_name']";
-  const emailSelector = "[name='email']";
-  const messageSelector = "[name='message']";
-  const successfulSubmissionSelector = "#contact_reply h1";
-  const unsuccessfulSubmissionSelector = "body";
-  const submitButtonSelector = '[type="submit"]';
-
-  const setFirstName = first_name => browser.setValue(firstNameSelector, first_name);
-  const setLastName = last_name => browser.setValue(lastNameSelector, last_name);
-  const setEmail = email => browser.setValue(emailSelector, email);
-  const setMessage = message => browser.setValue(messageSelector, message);
-  const clickSubmitButton = () => browser.click(submitButtonSelector);
+  const setFirstName = first_name => ContactUS_Page.firstName.setValue(first_name);
+  const setLastName = last_name => ContactUS_Page.lastName.setValue(last_name);
+  const setEmail = email => ContactUS_Page.email.setValue(email);
+  const setMessage = message => ContactUS_Page.message.setValue(message);
+  const clickSubmitButton = () => ContactUS_Page.submitButton.click();
   const confirmSuccessfulSubmission = () => {
-    const validateSubmissionHeader = browser.waitUntil( () => browser.getText(successfulSubmissionSelector) == "Thank You for your Message!", 3000);
+    const validateSubmissionHeader = browser.waitUntil( () => ContactUS_Page.successfulSubmissionHeader.getText() == "Thank You for your Message!", 3000);
     expect(validateSubmissionHeader, "Successful submission Message does not exist!").to.be.true;
   };
   const confirmUnsuccessfulSubmission = () => {
-    expect(browser.getText(unsuccessfulSubmissionSelector)).to.include("Error: all fields are required");
+    expect(ContactUS_Page.unsuccessfulSubmissionHeader.getText()).to.include("Error: all fields are required");
   };
 
   contactDetails.forEach(contactDetail => {
