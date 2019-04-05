@@ -1,59 +1,65 @@
-const request = require('sync-request');
-
-browser.addCommand("submitDataViaContactUSForm", (first_name, last_name, email, message) => {
-  if(first_name) browser.setValue("[name='first_name']", first_name);
-  if(last_name) browser.setValue("[name='last_name']", last_name);
-  if(email) browser.setValue("[name='email']", email);
-  if(message) browser.setValue("[name='message']", message);
-  browser.click('[type="submit"]');
-})
-
+const request = require("sync-request");
 
 beforeEach(() => {
-	browser.url('/Contact-Us/contactus.html');
-})
+  browser.url("/Contact-Us/contactus.html");
+});
 
-describe('Test Contact Us form WebdriverUni', () => {
-  const res = request('GET', 'https://jsonplaceholder.typicode.com/posts/1/comments')
-  let contactDetails = JSON.parse(res.getBody().toString('utf8'));
+describe("Test Contact Us form WebdriverUniversity", () => {
+  const res = request("GET", "https://jsonplaceholder.typicode.com/posts/1/comments");
+  let contactDetails = JSON.parse(res.getBody().toString("utf8"));
   contactDetails.length = 3; // get first 3 contact details
 
-    beforeEach(() => {
-      console.log('Inside the describe block!');
-    })
-contactDetails.forEach(contactDetail => {
-  it('Should be able to submit a successful submission via contact us form', () => {
-    browser.submitDataViaContactUSForm('Louis', 'Liao', contactDetail.email, contactDetail.body);
+  const firstNameSelector = "[name='first_name']";
+  const lastNameSelector = "[name='last_name']";
+  const emailSelector = "[name='email']";
+  const messageSelector = "[name='message']";
+  const successfulSubmissionSelector = "#contact_reply h1";
+  const unsuccessfulSubmissionSelector = "body";
+  const submitButtonSelector = '[type="submit"]';
 
-    const successfulContactConfirmation = browser.isExisting("#contact_reply h1");
-    assert.equal(successfulContactConfirmation, true, "Successful submission Message does not exist!");
+  const setFirstName = first_name => browser.setValue(firstNameSelector, first_name);
+  const setLastName = last_name => browser.setValue(lastNameSelector, last_name);
+  const setEmail = email => browser.setValue(emailSelector, email);
+  const setMessage = message => browser.setValue(messageSelector, message);
+  const clickSubmitButton = () => browser.click(submitButtonSelector);
+  const confirmSuccessfulSubmission = () => {
+    const validateSubmissionHeader = browser.waitUntil( () => browser.getText(successfulSubmissionSelector) == "Thank You for your Message!", 3000);
+    expect(validateSubmissionHeader, "Successful submission Message does not exist!").to.be.true;
+  };
+  const confirmUnsuccessfulSubmission = () => {
+    expect(browser.getText(unsuccessfulSubmissionSelector)).to.include("Error: all fields are required");
+  };
 
-    const successfulSubmission = browser.getText("#contact_reply h1");
-    assert.equal(successfulSubmission, "Thank You for your Message!");
+  contactDetails.forEach(contactDetail => {
+    it("Should be able to submit a successful submission via contact us form", () => {
+      setFirstName("Louis");
+      setLastName("Liao");
+      setEmail(contactDetail.email);
+      setMessage(contactDetail.body);
+      clickSubmitButton();
+      confirmSuccessfulSubmission();
     });
-})    
+  });
 
-  it('Should not be able to submit a successful submission via contact us form as all fields are required', () => {
-    browser.submitDataViaContactUSForm('Mike', 'Woods', 'mike_woods@gmail.com', null);
+  it("Should not be able to submit a successful submission via contact us form as all fields are required", () => {
+      setFirstName("Mike");
+      setLastName("Woods");
+      setEmail("mike_woods@gmail.com");
+      clickSubmitButton();
+      confirmUnsuccessfulSubmission();
+  });
 
-    const successfulContactConfirmation = browser.isExisting("#contact_reply h1");
-    assert.equal(successfulContactConfirmation, false);
-    });
-  
-  it('Should not be able to submit a successful submission via contact us form as all fields are required', () => {
-    browser.submitDataViaContactUSForm('Sara', null, 'sara_woods@gmail.com', null);
+  it("Should not be able to submit a successful submission via contact us form as all fields are required", () => {
+      setFirstName("Sara");
+      setEmail("sara_woods@gmail.com");
+      clickSubmitButton();
+      confirmUnsuccessfulSubmission();
+  });
 
-    const successfulContactConfirmation = browser.isExisting("#contact_reply h1");
-    assert.equal(successfulContactConfirmation, false);
-    });
-
-  it('Should not be able to submit a successful submission via contact us form as all fields are required', () => {
-    browser.submitDataViaContactUSForm('Jim', 'James', null, null);
-
-    let errorText = browser.getText("body");
-    expect(errorText).to.include('Error: all fields are required')
-
-    errorText = browser.isVisible('body');
-    expect(errorText, 'Error message is no visible').to.be.true;
-    });
+  it("Should not be able to submit a successful submission via contact us form as all fields are required", () => {
+      setFirstName("Jim");
+      setLastName("James");
+      clickSubmitButton();
+      confirmUnsuccessfulSubmission();
+  });
 });
