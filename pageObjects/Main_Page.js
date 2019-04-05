@@ -1,6 +1,10 @@
 class Main_Page {
-  get contactUs() { return $("#contact-us");}
-  get loginPortal() { return $("#login-portal");}
+  get contactUs() {
+    return $("#contact-us");
+  }
+  get loginPortal() {
+    return $("#login-portal");
+  }
 
   getTitle() {
     return browser.getTitle();
@@ -19,31 +23,29 @@ class Main_Page {
   }
   verifyMainPageTitle() {
     const title = this.getTitle();
-    expect(title).to.equal('WebDriverUniversity.com') 
-    console.log(`Title is: ${title}`);
-  }  
+    expect(title).to.equal("WebDriverUniversity.com");
+  }
   verifyContactUSPageTitle() {
     this.contactUs.click();
     const tabIDs = this.getTabIDs();
-    console.log(tabIDs);
     this.switchTab(tabIDs[1]);
     const title = this.getTitle();
-    expect(title).to.equal('WebDriver | Contact Us') 
+    expect(title).to.equal("WebDriver | Contact Us");
   }
   verifyLoginPortalPageTitle() {
     this.loginPortal.click();
     const tabIDs = this.getTabIDs();
     this.switchTab(tabIDs[1]);
     const title = this.getTitle();
-    expect(title).to.equal('WebDriver | Login Portal') 
+    expect(title).to.equal("WebDriver | Login Portal");
   }
   verifyContactUSPageUrl() {
     const url = this.getUrl();
-    expect(url).include('Contact-Us', 'URL Mismatch')
+    expect(url).include("Contact-Us", "URL Mismatch");
   }
   verifyLoginPortalPageUrl() {
     const url = this.getUrl();
-    expect(url).include('Login-Portal', 'URL Mismatch');
+    expect(url).include("Login-Portal", "URL Mismatch");
   }
 }
 module.exports = new Main_Page();

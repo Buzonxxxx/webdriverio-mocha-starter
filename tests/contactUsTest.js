@@ -46,12 +46,7 @@ describe("Test Contact Us form WebdriverUniversity", () => {
   });
 
   it("Should not be able to submit a successful submission via contact us form as all fields are required", () => {
-    ContactUS_Page.submitAllInformation(
-      "Jim,",
-      "James",
-      null,
-      null
-    );
+    ContactUS_Page.submitAllInformation("Jim,", "James", null, null);
     ContactUS_Page.confirmUnsuccessfulSubmission();
   });
 });
