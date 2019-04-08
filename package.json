@@ -19,6 +19,7 @@
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.2.0",
+    "del": "^4.1.0",
     "mocha": "^6.0.2",
     "sync-request": "^6.1.0",
     "wdio-allure-reporter": "^0.8.3",
