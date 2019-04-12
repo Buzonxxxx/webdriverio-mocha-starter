@@ -13,6 +13,20 @@ This repo incluse some sample tests/codes about how to use WebdirvierIO v4
   3. Execute test
   `npm test`
 
+## Allure Report Integration (https://docs.qameta.io/allure/)
+
+  1. Install wdio-allure-reporter
+`npm install wdio-allure-reporter --save-dev`  
+  2. Add allure report setting in wdio_conf.js
+  3. Install allure-commandline
+`npm install -g allure-commandline`
+  4. Execute test to generate allure results 
+  `npm test`
+  5. Generate allure report 
+  `allure generate ./reports/allure-results[,--clean]`
+  6. Open allure report
+  `allure open`
+
 ## Jenkin Integration (https://jenkins.io/download/)
 
 1. Download `.war` jankins package from jenkins website
@@ -39,19 +53,24 @@ e.g. `$PATH:/Users/[domain name]/.nvm/versions/node/v8.6.0/lib/node_modules/npm/
     npm test -- --baseUrl="$baseUrl" --spec="$automationTest" --logLevel="$logType"
   ~~~~
 
-## Allure Report Integration (https://docs.qameta.io/allure/)
+## Allure report and Jenkins Integration
 
-  1. Install wdio-allure-reporter
-`npm install wdio-allure-reporter --save-dev`  
-  2. Add allure report setting in wdio_conf.js
-  3. Install allure-commandline
-`npm install -g allure-commandline`
-  4. Execute test to generate allure results 
-  `npm test`
-  5. Generate allure report 
-  `allure generate ./reports/allure-results[,--clean]`
-  6. Open allure report
-  `allure open` 
+1. Post-build Actions> Post build task
+    * Add two post build tasks
+    1.
+    ~~~~
+    cd /Users/[domain name]/Desktop/
+
+    if [! -d /Users/[domain name]/Desktop/Allure_Reports ]; then
+    mkdir Allure_Reports;
+    ~~~~
+    2. 
+    ~~~~
+    cd /Users/[domain name]/Desktop/Allure_Reports
+
+    cp -R /Users/[domain name]/code/webdriverio-mocha-starter/reports /Users/[domain name]/Desktop/Allure_Reports/${BUILD_NUMBER}
+    ~~~~
+fi
 
 ## Note
 
