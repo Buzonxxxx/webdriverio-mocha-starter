@@ -89,7 +89,7 @@ directory:
 
     System.setProperty("jenkins.model.DirectoryBrowserSupport.CSP", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';")
     ~~~~
-
+    jenkins預設安全性為由, 不支援css, 需要打開設定
     ~~~~shell
     System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
     ~~~~
