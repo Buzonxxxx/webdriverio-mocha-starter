@@ -44,16 +44,8 @@ class ContactUs_Page {
     this.clickSubmitButton();
   }
   confirmSuccessfulSubmission() {
-    const validateSubmissionHeader = browser.waitUntil(
-      () =>
-        this.successfulSubmissionHeader.getText() ==
-        "Thank You for your Message!",
-      3000
-    );
-    expect(
-      validateSubmissionHeader,
-      "Successful submission Message does not exist!"
-    ).to.be.true;
+    const validateSubmissionHeader = browser.waitUntil(() => this.successfulSubmissionHeader.getText() == "Thank You for your Message!", 3000);
+    expect(validateSubmissionHeader, "Successful submission Message does not exist!").to.be.true;
   }
 
   confirmUnsuccessfulSubmission() {
